@@ -7,9 +7,9 @@ function App() {
     <div className="App">
       <h1>Chuck Norris App</h1>
       
-        <Row>
-          <Col xl={9}>1 of 2</Col>
-          <Col xl={3}>2 of 2</Col>
+        <Row className="row">
+          <Col xl={8}>1 of 2</Col>
+          <Col xl={4}>2 of 2</Col>
         </Row>
       
     </div>
