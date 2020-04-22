@@ -1,9 +1,28 @@
-div {
-  background-color: orange;
-  border: 1px solid black;
-}
+@import "./assets/scss/variables";
 
 .row {
   margin-right: 0;
   margin-left: 0;
+}
+
+%header-item-styles {
+  margin: 20px;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  &__headline {
+    @extend %header-item-styles;
+    font-weight: bold;
+  }
+
+  &__favourite {
+    @extend %header-item-styles;
+    font-weight: 500;
+    color: $grey;
+  }
 }

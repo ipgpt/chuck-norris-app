@@ -5,13 +5,18 @@ import './App.scss';
 function App() {
   return (
     <div className="App">
-      <h1>Chuck Norris App</h1>
-      
+      <header className="header">
+        <div className="header__headline">MSI 2020</div>
+        <div className="header__favourite">Favourite</div>
+      </header>
+      <main>
         <Row className="row">
-          <Col xl={8}>1 of 2</Col>
-          <Col xl={4}>2 of 2</Col>
+          <Col xl={8}>
+            
+          </Col>
+          <Col xl={4}>Favourite (in desktop)</Col>
         </Row>
-      
+      </main>
     </div>
   );
 }
