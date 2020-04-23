@@ -1,0 +1,58 @@
+@import "../assets/scss/variables";
+
+%paragraph-styles {
+  margin: 0;
+  line-height: 44px;
+}
+
+.hey {
+  @extend %paragraph-styles;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.title {
+  @extend %paragraph-styles;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+.custom-control-label {
+  font-size: 18px;
+  line-height: 26px;
+  margin-bottom: 12px;
+  padding-left: 10px;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $black;
+  background-color: $white;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='4' fill='333333'/%3e%3c/svg%3e");
+}
+
+.form {
+  &__search-field {
+    max-width: 680px;
+    padding: 10px 15px;
+    border: 2px solid $black;
+    border-radius: 10px;
+    color: $black;
+
+    &::placeholder {
+      color: $grey;
+    }
+  }
+
+  &__submit {
+    padding: 10px 40px;
+    font-weight: bold;
+    line-height: 22px;
+    background-color: $blue;
+    border: 1px solid $blue;
+    border-radius: 10px;
+  }
+}

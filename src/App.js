@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import './App.scss';
+import JokesForm from './JokesForm';
 
 function App() {
   return (
@@ -10,11 +11,11 @@ function App() {
         <div className="header__favourite">Favourite</div>
       </header>
       <main>
-        <Row className="row">
-          <Col xl={8}>
-            
+        <Row>
+          <Col className="column" xl={8}>
+            <JokesForm />
           </Col>
-          <Col xl={4}>Favourite (in desktop)</Col>
+          <Col className="column" xl={4}>Favourite (in desktop)</Col>
         </Row>
       </main>
     </div>
