@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import "./App.scss";
 import JokesForm from "./JokesForm";
-import JokesCard from "./JokesCard";
+import JokesList from "./JokesList";
 
 function App() {
+  const [state, setState] = useState({});
+
+  function getData(data) {
+    setState(data);
+  }
+
   return (
     <div className="App">
       <header className="header">
@@ -14,9 +20,8 @@ function App() {
       <main>
         <Row>
           <Col className="column" xl={8}>
-            <JokesForm />
-            <br />
-            <JokesCard />
+            <JokesForm getData={getData} />
+            <JokesList joke={state} />
           </Col>
           <Col className="column" xl={4}>
             Favourite (in desktop)

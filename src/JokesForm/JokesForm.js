@@ -4,16 +4,18 @@ import axios from "axios";
 import "./JokesForm.scss";
 import { apiUrl, categoryData } from "./JokesForm.constants";
 
-function JokesForm() {
+function JokesForm(props) {
+  const { getData } = props;
   const [state, setState] = useState({
     jokeType: "",
     value: "",
   });
 
-  async function getJoke(params) {
+  async function getJokes(params) {
     try {
       const response = await axios.get(`${apiUrl}${params}`);
       console.log(response);
+      getData(response);
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +54,7 @@ function JokesForm() {
     } else {
       return alert("You need to choose the type of joke");
     }
-    getJoke(params + state.value);
+    getJokes(params + state.value);
     setState({ jokeType: "", value: "" });
     event.preventDefault();
   }

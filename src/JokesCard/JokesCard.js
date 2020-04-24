@@ -4,7 +4,9 @@ import linkIcon from "../assets/img/link.png";
 import heartEmptyIcon from "../assets/img/heart-empty.png";
 //import heartFullIcon from "../assets/img/heart-full.png";
 
-function JokesCard() {
+function JokesCard(props) {
+  const { id, link, joke, date, category } = props;
+
   return (
     <div className="jokes-card">
       <button className="jokes-card__button">
@@ -13,8 +15,13 @@ function JokesCard() {
       <div className="jokes-card__body">
         <p className="jokes-card__link-area">
           ID:{" "}
-          <a className="jokes-card__link" href="#">
-            XNaAxUduSw6zANDaIEab7A
+          <a
+            className="jokes-card__link"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {id}
           </a>
           <img
             className="jokes-card__link-icon"
@@ -22,17 +29,16 @@ function JokesCard() {
             alt="link icon"
           />
         </p>
-        <p className="jokes-card__content">
-          No one truly knows who's Chuck Norris' real father. No one is
-          biologically strong enough for this. He must've conceived himself.
-        </p>
+        <p className="jokes-card__content">{joke}</p>
       </div>
       <div className="jokes-card__footer">
         <div className="jokes-card__last-update">
           Last update:{" "}
-          <span className="jokes-card__last-update-hours">1923 hours ago</span>
+          <span className="jokes-card__last-update-hours">{date}</span>
         </div>
-        <div className="jokes-card__category">Celebrity</div>
+        {category ? (
+          <div className="jokes-card__category">{category}</div>
+        ) : null}
       </div>
     </div>
   );
