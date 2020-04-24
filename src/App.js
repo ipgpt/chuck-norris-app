@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "./App.scss";
 import JokesForm from "./JokesForm";
+import JokesCard from "./JokesCard";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Row>
           <Col className="column" xl={8}>
             <JokesForm />
+            <br />
+            <JokesCard />
           </Col>
           <Col className="column" xl={4}>
             Favourite (in desktop)

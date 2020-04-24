@@ -1,0 +1,88 @@
+@import "../assets/scss/variables";
+
+%small-text {
+  font-size: 10px;
+  line-height: 14px;
+  color: $grey;
+}
+
+.jokes-card {
+  max-width: 680px;
+  padding: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $light-grey;
+  border-radius: 20px;
+
+  &__button {
+    align-self: flex-end;
+    background-color: inherit;
+    border: 0;
+  }
+
+  &__link-area {
+    @extend %small-text;
+
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  &__link {
+    color: $blue;
+    text-decoration: underline;
+  }
+
+  &__link-icon {
+    margin-left: 5px;
+  }
+
+  &__content {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__body {
+    margin-left: 70px;
+
+    &::before {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      left: 45px;
+      border-radius: 50px;
+      background-color: $white;
+      background-image: url("../assets/img/message.png");
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      content: "";
+    }
+  }
+
+  &__footer {
+    margin-left: 70px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__last-update {
+    @extend %small-text;
+  }
+
+  &__last-update-hours {
+    font-weight: 500;
+    color: $grey;
+  }
+
+  &__category {
+    @extend %small-text;
+
+    padding: 6px 20px;
+    font-weight: 500;
+    color: $black;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: $white;
+    border-radius: 6px;
+  }
+}
