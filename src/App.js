@@ -1,7 +1,7 @@
-import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import './App.scss';
-import JokesForm from './JokesForm';
+import React from "react";
+import { Row, Col } from "react-bootstrap";
+import "./App.scss";
+import JokesForm from "./JokesForm";
 
 function App() {
   return (
@@ -15,7 +15,9 @@ function App() {
           <Col className="column" xl={8}>
             <JokesForm />
           </Col>
-          <Col className="column" xl={4}>Favourite (in desktop)</Col>
+          <Col className="column" xl={4}>
+            Favourite (in desktop)
+          </Col>
         </Row>
       </main>
     </div>

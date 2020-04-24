@@ -25,12 +25,12 @@
     margin-bottom: 12px;
     padding-left: 10px;
   }
-  
+
   .custom-control-input:checked ~ .custom-control-label::before {
     border-color: $black;
     background-color: $white;
   }
-  
+
   .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='4' fill='333333'/%3e%3c/svg%3e");
   }
@@ -52,7 +52,7 @@
       border-radius: 6px;
     }
 
-    .custom-control-label::before, 
+    .custom-control-label::before,
     .custom-control-label::after {
       content: none;
     }

@@ -82,21 +82,21 @@ function JokesForm() {
           checked={state.jokeType === "Category"}
           onChange={handleChangeRadioButtons}
         />
-        {state.jokeType === "Category" ? (
-          categoryData.map(data => (
-            <Form.Check
-          custom
-          className={data.name}
-          type={data.type}
-          name={data.name}
-          id={data.id}
-          label={data.value}
-          value={data.value}
-          checked={state.value === data.value}
-          onChange={handleChangeCategory}
-        />
-          ))
-        ) : null}
+        {state.jokeType === "Category"
+          ? categoryData.map((data) => (
+              <Form.Check
+                custom
+                className={data.name}
+                type={data.type}
+                name={data.name}
+                id={data.id}
+                label={data.value}
+                value={data.value}
+                checked={state.value === data.value}
+                onChange={handleChangeCategory}
+              />
+            ))
+          : null}
         <Form.Check
           custom
           type="radio"
