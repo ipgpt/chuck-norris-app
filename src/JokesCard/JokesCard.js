@@ -7,6 +7,12 @@ import heartEmptyIcon from "../assets/img/heart-empty.png";
 function JokesCard(props) {
   const { id, link, joke, date, category } = props;
 
+  function convertDateToHoursAgo(date) {
+    const currentTime = new Date();
+    const jokeDate = new Date(date)
+    return Math.floor((currentTime - jokeDate) / 3600 / 1000);
+  }
+
   return (
     <div className="jokes-card">
       <button className="jokes-card__button">
@@ -34,7 +40,9 @@ function JokesCard(props) {
       <div className="jokes-card__footer">
         <div className="jokes-card__last-update">
           Last update:{" "}
-          <span className="jokes-card__last-update-hours">{date}</span>
+          <span className="jokes-card__last-update-hours">
+            {convertDateToHoursAgo(date)} hours ago
+          </span>
         </div>
         {category ? (
           <div className="jokes-card__category">{category}</div>
