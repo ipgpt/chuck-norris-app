@@ -6,6 +6,11 @@
   line-height: 28px;
 }
 
+%paragraph-styles {
+  margin: 0;
+  line-height: 44px;
+}
+
 .App {
   position: relative;
 }
@@ -78,6 +83,20 @@
 
 .main {
   padding: 0 20px;
+
+  &__hey {
+    @extend %paragraph-styles;
+    margin-top: 60px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__title {
+    @extend %paragraph-styles;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 40px;
+  }
 }
 
 @media screen and (min-width: 768px) {

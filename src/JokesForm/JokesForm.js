@@ -61,8 +61,6 @@ function JokesForm(props) {
 
   return (
     <>
-      <p className="hey">Hey!</p>
-      <p className="title">Let’s try to find a joke for you:</p>
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Check
           custom

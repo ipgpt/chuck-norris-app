@@ -1,24 +1,5 @@
 @import "../assets/scss/variables";
 
-%paragraph-styles {
-  margin: 0;
-  line-height: 44px;
-}
-
-.hey {
-  @extend %paragraph-styles;
-  margin-top: 60px;
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.title {
-  @extend %paragraph-styles;
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 40px;
-}
-
 .form {
   .custom-control-label {
     font-size: 18px;

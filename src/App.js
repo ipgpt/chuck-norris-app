@@ -33,7 +33,7 @@ function App() {
   function handleFavourite() {
     setState({ ...state, isOpenFavourite: !state.isOpenFavourite });
   }
-  
+
   return (
     <div className={state.isOpenFavourite ? "App App--grey" : "App"}>
       <header className="header">
@@ -59,6 +59,8 @@ function App() {
       </header>
       {state.isOpenFavourite ? <Favourite /> : null}
       <main className="main">
+        <p className="main__hey">Hey!</p>
+        <p className="main__title">Let’s try to find a joke for you:</p>
         <JokesForm getData={getData} />
         <JokesList joke={state.jokeData} />
       </main>
