@@ -1,0 +1,60 @@
+@import "../assets/scss/variables";
+
+.favourite {
+  margin-top: 20px;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 1;
+
+  &__mask {
+    display: none;
+  }
+
+  &__content {
+    background-color: $light-grey;
+    height: inherit;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .favourite {
+    display: flex;
+    justify-content: flex-end;
+
+    &__mask {
+      width: calc(100% - 480px);
+      height: inherit;
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      font-size: 0;
+      background-color: $mask;
+    }
+
+    &__content {
+      width: 480px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .favourite {
+    width: 480px;
+    right: 0;
+
+    &__mask {
+      width: 480px;
+      height: 135px;
+      left: auto;
+      padding-top: 40px;
+      padding-left: 40px;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+      color: $grey;
+      background-color: $light-grey;
+    }
+  }
+}

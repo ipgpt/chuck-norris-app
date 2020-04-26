@@ -7,6 +7,7 @@
 
 .hey {
   @extend %paragraph-styles;
+  margin-top: 60px;
   font-size: 32px;
   font-weight: bold;
 }

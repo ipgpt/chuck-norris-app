@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import JokesForm from "./JokesForm";
 import JokesList from "./JokesList";
@@ -8,12 +7,23 @@ import Favourite from "./Favourite";
 function App() {
   const [state, setState] = useState({
     jokeData: {},
-    isOpenFavourite: false,
+    isOpenFavourite: window.innerWidth >= 1200 ? true : false,
     favouriteDate: {
       data: {
         result: [],
       },
     },
+  });
+
+  function resizeWindow() {
+    if (window.innerWidth >= 1200) {
+      setState({ ...state, isOpenFavourite: true });
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
   });
 
   function getData(data) {
@@ -23,12 +33,18 @@ function App() {
   function handleFavourite() {
     setState({ ...state, isOpenFavourite: !state.isOpenFavourite });
   }
-
+  
   return (
     <div className={state.isOpenFavourite ? "App App--grey" : "App"}>
       <header className="header">
-        <div className="header__headline">
-          {state.isOpenFavourite ? "" : "MSI 2020"}
+        <div
+          className={
+            state.isOpenFavourite
+              ? "header__headline header__headline--hidden"
+              : "header__headline"
+          }
+        >
+          MSI 2020
         </div>
         <button
           className={
@@ -41,23 +57,11 @@ function App() {
           Favourite
         </button>
       </header>
-      {state.isOpenFavourite ? (
-        <Favourite />
-      ) : (
-        <>
-          <main>
-            <Row>
-              <Col className="column" xl={8}>
-                <JokesForm getData={getData} />
-                <JokesList joke={state.jokeData} />
-              </Col>
-              <Col className="column" xl={4}>
-                Favourite (in desktop)
-              </Col>
-            </Row>
-          </main>
-        </>
-      )}
+      {state.isOpenFavourite ? <Favourite /> : null}
+      <main className="main">
+        <JokesForm getData={getData} />
+        <JokesList joke={state.jokeData} />
+      </main>
     </div>
   );
 }
