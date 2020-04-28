@@ -65,4 +65,9 @@
     border: 1px solid $blue;
     border-radius: 10px;
   }
+
+  &__alert {
+    max-width: 480px;
+    margin-bottom: 20px;
+  }
 }

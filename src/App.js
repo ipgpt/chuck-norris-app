@@ -5,9 +5,10 @@ import JokesList from "./JokesList";
 import Favourite from "./Favourite";
 
 function App() {
+  const isDesktopWidth = window.innerWidth >= 1200 ? true : false;
   const [state, setState] = useState({
     jokeData: {},
-    isOpenFavourite: window.innerWidth >= 1200 ? true : false,
+    isOpenFavourite: isDesktopWidth,
     favouriteDate: {
       data: {
         result: [],

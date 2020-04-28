@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./JokesForm.scss";
 import { apiUrl, categoryData } from "./JokesForm.constants";
@@ -9,6 +9,8 @@ function JokesForm(props) {
   const [state, setState] = useState({
     jokeType: "",
     value: "",
+    isAlert: false,
+    alertText: "",
   });
 
   async function getJokes(params) {
@@ -23,7 +25,7 @@ function JokesForm(props) {
 
   function handleChangeRadioButtons(event) {
     if (state.jokeType !== "Random") {
-      setState({ jokeType: event.target.value, value: "" });
+      setState({ ...state, jokeType: event.target.value, value: "" });
     } else {
       setState({ ...state, jokeType: event.target.value });
     }
@@ -41,21 +43,39 @@ function JokesForm(props) {
     let params = "";
     if (state.jokeType === "Random") {
       params = "random";
+      getJokes(params + state.value);
+      setState({ ...state, isAlert: false });
     } else if (state.jokeType === "Category") {
       params = "random?category=";
       if (!state.value) {
-        return alert("You need to choose the category of joke");
+        setState({
+          ...state,
+          alertText: "WARNING: You need to choose the category of joke",
+          isAlert: true,
+        });
+      } else {
+        getJokes(params + state.value);
+        setState({ ...state, isAlert: false });
       }
     } else if (state.jokeType === "Search") {
       params = "search?query=";
       if (!state.value) {
-        return alert("You need to write what to search");
+        setState({
+          ...state,
+          alertText: "WARNING: You need to write what to search",
+          isAlert: true,
+        });
+      } else {
+        getJokes(params + state.value);
+        setState({ ...state, isAlert: false });
       }
-    } else {
-      return alert("You need to choose the type of joke");
+    } else if (!state.jokeType) {
+      setState({
+        ...state,
+        alertText: "WARNING: You need to choose the type of joke",
+        isAlert: true,
+      });
     }
-    getJokes(params + state.value);
-    setState({ jokeType: "", value: "" });
     event.preventDefault();
   }
 
@@ -116,6 +136,18 @@ function JokesForm(props) {
           />
         ) : null}
         <br />
+        {state.isAlert ? (
+          <Alert
+            className="form__alert"
+            variant="warning"
+            onClose={() => {
+              setState({ ...state, isAlert: false });
+            }}
+            dismissible
+          >
+            {state.alertText}
+          </Alert>
+        ) : null}
         <Button className="form__submit" variant="primary" type="submit">
           Get a joke
         </Button>
