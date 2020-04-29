@@ -1,4 +1,5 @@
 import React from "react";
+import { Alert } from "react-bootstrap";
 import JokesCard from "../JokesCard";
 
 function JokesList(props) {
@@ -7,15 +8,24 @@ function JokesList(props) {
     <>
       {Object.keys(joke).length ? (
         joke.data.result ? (
-          joke.data.result.map((item) => (
-            <JokesCard
-              id={item.id}
-              link={item.url}
-              joke={item.value}
-              date={item.updated_at}
-              category={item.categories.length ? item.categories[0] : null}
-            />
-          ))
+          !joke.data.total ? (
+            <Alert
+              variant="primary"
+              style={{ marginTop: 20, maxWidth: "480px" }}
+            >
+              The search has not given any results
+            </Alert>
+          ) : (
+            joke.data.result.map((item) => (
+              <JokesCard
+                id={item.id}
+                link={item.url}
+                joke={item.value}
+                date={item.updated_at}
+                category={item.categories.length ? item.categories[0] : null}
+              />
+            ))
+          )
         ) : (
           <JokesCard
             id={joke.data.id}
