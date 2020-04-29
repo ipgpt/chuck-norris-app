@@ -17,8 +17,13 @@
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='4' fill='333333'/%3e%3c/svg%3e");
   }
 
-  .category {
-    display: inline-block;
+  &__categories {
+    max-width: 680px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__category {
     padding-left: 0;
     padding-right: 10px;
 
@@ -67,7 +72,7 @@
   }
 
   &__alert {
-    max-width: 480px;
+    max-width: 680px;
     margin-bottom: 20px;
   }
 }

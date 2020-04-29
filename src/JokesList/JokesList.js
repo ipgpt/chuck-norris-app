@@ -11,13 +11,14 @@ function JokesList(props) {
           !joke.data.total ? (
             <Alert
               variant="primary"
-              style={{ marginTop: 20, maxWidth: "480px" }}
+              style={{ marginTop: 20, maxWidth: "680px" }}
             >
               The search has not given any results
             </Alert>
           ) : (
             joke.data.result.map((item) => (
               <JokesCard
+                key={item.id}
                 id={item.id}
                 link={item.url}
                 joke={item.value}

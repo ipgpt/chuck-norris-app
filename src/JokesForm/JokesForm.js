@@ -1,26 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./JokesForm.scss";
-import { apiUrl, categoryData } from "./JokesForm.constants";
+
+const apiUrl = "https://api.chucknorris.io/jokes/";
+const apiUrlCategories = `${apiUrl}categories`;
 
 function JokesForm(props) {
   const { getData } = props;
   const [state, setState] = useState({
     jokeType: "",
     value: "",
+    categories: [],
     isAlert: false,
     alertText: "",
   });
 
-  async function getJokes(params) {
-    try {
-      const response = await axios.get(`${apiUrl}${params}`);
-      console.log(response);
-      getData(response);
-    } catch (error) {
-      console.error(error);
-    }
+  useEffect(() => {
+    axios
+      .get(`${apiUrlCategories}`)
+      .then((result) => {
+        setState({ ...state, categories: result.data });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function getJokes(params) {
+    axios
+      .get(`${apiUrl}${params}`)
+      .then((result) => {
+        getData(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function handleChangeRadioButtons(event) {
@@ -102,21 +118,24 @@ function JokesForm(props) {
           checked={state.jokeType === "Category"}
           onChange={handleChangeRadioButtons}
         />
-        {state.jokeType === "Category"
-          ? categoryData.map((data) => (
+        {state.jokeType === "Category" ? (
+          <div className="form__categories">
+            {state.categories.map((data) => (
               <Form.Check
                 custom
-                className={data.name}
-                type={data.type}
-                name={data.name}
-                id={data.id}
-                label={data.value}
-                value={data.value}
-                checked={state.value === data.value}
+                key={data}
+                className="form__category"
+                type="radio"
+                name="category"
+                id={data}
+                label={data}
+                value={data}
+                checked={state.value === data}
                 onChange={handleChangeCategory}
               />
-            ))
-          : null}
+            ))}
+          </div>
+        ) : null}
         <Form.Check
           custom
           type="radio"
