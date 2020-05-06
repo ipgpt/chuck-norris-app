@@ -14,7 +14,7 @@
   &__content {
     position: fixed;
     top: 0;
-    padding-top: 140px;
+    padding-top: 70px;
     height: inherit;
     background-color: $light-grey;
   }
@@ -22,7 +22,7 @@
   &__list {
     height: inherit;
     padding: 20px;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
     overflow: auto;
   }
 }
@@ -56,7 +56,7 @@
 
     &__mask {
       width: 480px;
-      height: 135px;
+      height: 100px;
       left: auto;
       padding-top: 40px;
       padding-left: 40px;
