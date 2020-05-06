@@ -15,11 +15,6 @@
   position: relative;
 }
 
-.App--grey {
-  height: 100vh;
-  background-color: $light-grey;
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -41,6 +36,7 @@
     color: $grey;
     background-color: inherit;
     border: 0;
+    z-index: 2;
 
     &:focus {
       outline: none;
@@ -117,7 +113,7 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .App--grey {
-    background-color: $white;
+  .header__favourite {
+    z-index: 0;
   }
 }

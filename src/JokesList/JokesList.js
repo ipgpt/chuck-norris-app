@@ -3,41 +3,33 @@ import { Alert } from "react-bootstrap";
 import JokesCard from "../JokesCard";
 
 function JokesList(props) {
-  const { joke } = props;
+  const {
+    jokeData,
+    isFavouriteList,
+    checkFavouriteItem,
+    addToFavourite,
+    removeFromFavourite,
+  } = props;
+
   return (
     <>
-      {Object.keys(joke).length ? (
-        joke.data.result ? (
-          !joke.data.total ? (
-            <Alert
-              variant="primary"
-              style={{ marginTop: 20, maxWidth: "680px" }}
-            >
-              The search has not given any results
-            </Alert>
-          ) : (
-            joke.data.result.map((item) => (
-              <JokesCard
-                key={item.id}
-                id={item.id}
-                link={item.url}
-                joke={item.value}
-                date={item.updated_at}
-                category={item.categories.length ? item.categories[0] : null}
-              />
-            ))
-          )
-        ) : (
-          <JokesCard
-            id={joke.data.id}
-            link={joke.data.url}
-            joke={joke.data.value}
-            date={joke.data.updated_at}
-            category={
-              joke.data.categories.length ? joke.data.categories[0] : null
-            }
-          />
-        )
+      {Object.keys(jokeData).length ? (
+        jokeData.total === 0 ? (
+          <Alert variant="primary" style={{ marginTop: 20, maxWidth: "680px" }}>
+            The search has not given any results
+          </Alert>
+        ) : jokeData.result.length ? (
+          jokeData.result.map((item) => (
+            <JokesCard
+              key={item.id}
+              item={item}
+              isFavouriteList={isFavouriteList}
+              checkFavouriteItem={checkFavouriteItem}
+              addToFavourite={addToFavourite}
+              removeFromFavourite={removeFromFavourite}
+            />
+          ))
+        ) : null
       ) : null}
     </>
   );

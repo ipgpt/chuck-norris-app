@@ -19,20 +19,23 @@ function JokesForm(props) {
   useEffect(() => {
     axios
       .get(`${apiUrlCategories}`)
-      .then((result) => {
-        setState({ ...state, categories: result.data });
+      .then((response) => {
+        setState({ ...state, categories: response.data });
       })
       .catch((error) => {
         console.error(error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function getJokes(params) {
     axios
       .get(`${apiUrl}${params}`)
-      .then((result) => {
-        getData(result);
+      .then((response) => {
+        const resultData = response.data.result
+          ? response.data
+          : { result: [response.data], total: 1 };
+        getData(resultData);
       })
       .catch((error) => {
         console.error(error);

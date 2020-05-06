@@ -1,33 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./JokesCard.scss";
 import linkIcon from "../assets/img/link.png";
 import heartEmptyIcon from "../assets/img/heart-empty.png";
-//import heartFullIcon from "../assets/img/heart-full.png";
+import heartFullIcon from "../assets/img/heart-full.png";
 
 function JokesCard(props) {
-  const { id, link, joke, date, category } = props;
+  const {
+    item,
+    isFavouriteList,
+    checkFavouriteItem,
+    addToFavourite,
+    removeFromFavourite,
+  } = props;
+  const cardClassName = isFavouriteList
+    ? "jokes-card jokes-card--white"
+    : "jokes-card";
+  const [heart, setHeart] = useState(isFavouriteList);
+
+  useEffect(() => {
+    checkFavouriteItem(item) ? setHeart(true) : setHeart(false);
+  }, [checkFavouriteItem, heart, item]);
+
+  function handleFavouriteButton() {
+    heart ? removeFromFavourite(item) : addToFavourite(item);
+    setHeart(!heart);
+  }
 
   function convertDateToHoursAgo(date) {
     const currentTime = new Date();
-    const jokeDate = new Date(date)
+    const jokeDate = new Date(date);
     return Math.floor((currentTime - jokeDate) / 3600 / 1000);
   }
 
   return (
-    <div className="jokes-card">
-      <button className="jokes-card__button">
-        <img src={heartEmptyIcon} alt="heart" />
+    <div className={cardClassName}>
+      <button className="jokes-card__button" onClick={handleFavouriteButton}>
+        <img src={heart ? heartFullIcon : heartEmptyIcon} alt="heart" />
       </button>
       <div className="jokes-card__body">
         <p className="jokes-card__link-area">
           ID:{" "}
           <a
             className="jokes-card__link"
-            href={link}
+            href={item.url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {id}
+            {item.id}
           </a>
           <img
             className="jokes-card__link-icon"
@@ -35,17 +54,17 @@ function JokesCard(props) {
             alt="link icon"
           />
         </p>
-        <p className="jokes-card__content">{joke}</p>
+        <p className="jokes-card__content">{item.value}</p>
       </div>
       <div className="jokes-card__footer">
         <div className="jokes-card__last-update">
           Last update:{" "}
           <span className="jokes-card__last-update-hours">
-            {convertDateToHoursAgo(date)} hours ago
+            {convertDateToHoursAgo(item.updated_at)} hours ago
           </span>
         </div>
-        {category ? (
-          <div className="jokes-card__category">{category}</div>
+        {item.categories.length ? (
+          <div className="jokes-card__category">{item.categories[0]}</div>
         ) : null}
       </div>
     </div>

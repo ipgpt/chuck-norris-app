@@ -9,11 +9,7 @@ function App() {
   const [state, setState] = useState({
     jokeData: {},
     isOpenFavourite: isDesktopWidth,
-    favouriteDate: {
-      data: {
-        result: [],
-      },
-    },
+    favouriteDate: { result: [] },
   });
 
   function resizeWindow() {
@@ -27,16 +23,56 @@ function App() {
     return () => window.removeEventListener("resize", resizeWindow);
   });
 
+  useEffect(() => {
+    if (state.isOpenFavourite && window.innerWidth < 1200) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => (document.body.style.overflow = "auto");
+  });
+
   function getData(data) {
     setState({ ...state, jokeData: data });
   }
 
-  function handleFavourite() {
+  function handleFavouriteArea() {
     setState({ ...state, isOpenFavourite: !state.isOpenFavourite });
   }
 
+  function checkFavouriteItem(item) {
+    const {
+      favouriteDate: { result },
+    } = state;
+    return result.find((joke) => joke.id === item.id);
+  }
+
+  function addToFavourite(item) {
+    const {
+      favouriteDate: { result },
+    } = state;
+
+    setState({
+      ...state,
+      favouriteDate: { result: [...result, item] },
+    });
+  }
+
+  function removeFromFavourite(item) {
+    const {
+      favouriteDate: { result },
+    } = state;
+
+    if (checkFavouriteItem(item)) {
+      setState({
+        ...state,
+        favouriteDate: {
+          result: result.filter((joke) => joke.id !== item.id),
+        },
+      });
+    }
+  }
+
   return (
-    <div className={state.isOpenFavourite ? "App App--grey" : "App"}>
+    <div className="App">
       <header className="header">
         <div
           className={
@@ -53,17 +89,29 @@ function App() {
               ? "header__favourite header__favourite--open"
               : "header__favourite"
           }
-          onClick={handleFavourite}
+          onClick={handleFavouriteArea}
         >
           Favourite
         </button>
       </header>
-      {state.isOpenFavourite ? <Favourite /> : null}
+      {state.isOpenFavourite ? (
+        <Favourite
+          favouriteDate={state.favouriteDate}
+          checkFavouriteItem={checkFavouriteItem}
+          removeFromFavourite={removeFromFavourite}
+        />
+      ) : null}
       <main className="main">
         <p className="main__hey">Hey!</p>
         <p className="main__title">Let’s try to find a joke for you:</p>
         <JokesForm getData={getData} />
-        <JokesList joke={state.jokeData} />
+        <JokesList
+          jokeData={state.jokeData}
+          isFavouriteList={false}
+          checkFavouriteItem={checkFavouriteItem}
+          addToFavourite={addToFavourite}
+          removeFromFavourite={removeFromFavourite}
+        />
       </main>
     </div>
   );
