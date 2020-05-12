@@ -3,7 +3,7 @@ import "./Favourite.scss";
 import JokesList from "../JokesList";
 
 function Favourite(props) {
-  const { favouriteDate, checkFavouriteItem, removeFromFavourite } = props;
+  const { favouriteData, checkFavouriteItem, removeFromFavourite } = props;
 
   return (
     <div className="favourite">
@@ -11,7 +11,7 @@ function Favourite(props) {
       <div className="favourite__content">
         <div className="favourite__list">
           <JokesList
-            jokeData={favouriteDate}
+            jokeData={favouriteData}
             isFavouriteList={true}
             checkFavouriteItem={checkFavouriteItem}
             removeFromFavourite={removeFromFavourite}

@@ -5,11 +5,13 @@ import JokesList from "./JokesList";
 import Favourite from "./Favourite";
 
 function App() {
+  const favouriteLocalStore =
+    JSON.parse(localStorage.getItem("favourite")) || [];
   const isDesktopWidth = window.innerWidth >= 1200 ? true : false;
   const [state, setState] = useState({
     jokeData: {},
     isOpenFavourite: isDesktopWidth,
-    favouriteDate: { result: [] },
+    favouriteData: { result: favouriteLocalStore },
   });
 
   function resizeWindow() {
@@ -40,31 +42,35 @@ function App() {
 
   function checkFavouriteItem(item) {
     const {
-      favouriteDate: { result },
+      favouriteData: { result },
     } = state;
     return result.find((joke) => joke.id === item.id);
   }
 
   function addToFavourite(item) {
     const {
-      favouriteDate: { result },
+      favouriteData: { result },
     } = state;
-
+    const newFavouriteStore = [...favouriteLocalStore, item];
+    localStorage.setItem("favourite", JSON.stringify(newFavouriteStore));
     setState({
       ...state,
-      favouriteDate: { result: [...result, item] },
+      favouriteData: { result: [...result, item] },
     });
   }
 
   function removeFromFavourite(item) {
     const {
-      favouriteDate: { result },
+      favouriteData: { result },
     } = state;
-
+    const newFavouriteStore =
+      favouriteLocalStore.filter((data) => data.id !== item.id) ||
+      favouriteLocalStore;
+    localStorage.setItem("favourite", JSON.stringify(newFavouriteStore));
     if (checkFavouriteItem(item)) {
       setState({
         ...state,
-        favouriteDate: {
+        favouriteData: {
           result: result.filter((joke) => joke.id !== item.id),
         },
       });
@@ -96,7 +102,7 @@ function App() {
       </header>
       {state.isOpenFavourite ? (
         <Favourite
-          favouriteDate={state.favouriteDate}
+          favouriteData={state.favouriteData}
           checkFavouriteItem={checkFavouriteItem}
           removeFromFavourite={removeFromFavourite}
         />
